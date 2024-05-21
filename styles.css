@@ -195,6 +195,12 @@
     z-index: 1000; /* Ensure it's above other elements */
 }
 
+@media (min-width: 768px) {
+    #pointerLockInstruction {
+        display: block; /* Show on screens wider than 768px */
+    }
+}
+
 #closeButton {
     position: fixed;
     top: 0px;
@@ -206,6 +212,10 @@
 }
 
 .a-enter-vr-button {
+    display: none!important;
+}
+
+.a-enter-ar-button {
     display: none!important;
 }
 
