@@ -1,27 +1,27 @@
 $(document).ready(function () {
     $('#pointerLockInstruction').css('display', 'block');
-        var map = L.map('map').setView([51.06, -4.2], 10.5);
+    var map = L.map('map').setView([51.06, -4.2], 10.5);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-        var marker = L.marker([50.939626, -4.5447578]).addTo(map);
-        marker.on('click', function () {
-          openAFrameScene('southhole.jpg');
-        });
+    var marker = L.marker([50.939626, -4.5447578]).addTo(map);
+    marker.on('click', function () {
+        openAFrameScene('southhole.jpg');
+    });
 
-        function openAFrameScene(photoUrl) {
-          var aframeContainer = document.getElementById('aframe-container');
-          var aframeSky = document.querySelector('a-sky');
-          aframeSky.setAttribute('src', photoUrl);
-          aframeContainer.style.display = 'block';
-          
-          window.scrollTo(0, 0);
-        }
+    function openAFrameScene(photoUrl) {
+        var aframeContainer = document.getElementById('aframe-container');
+        var aframeSky = document.querySelector('a-sky');
+        aframeSky.setAttribute('src', photoUrl);
+        aframeContainer.style.display = 'block';
 
-        // Enable pointer lock on Ctrl/Command key press
-    $(document).keydown(function(event) {
+        window.scrollTo(0, 0);
+    }
+
+    // Enable pointer lock on Ctrl/Command key press
+    $(document).keydown(function (event) {
         if (event.ctrlKey || event.metaKey) {
             if (document.pointerLockElement === document.body) {
                 document.exitPointerLock();
@@ -31,25 +31,63 @@ $(document).ready(function () {
         }
     });
 
-        // Exit pointer lock on Esc key press
-        document.addEventListener('pointerlockchange', function () {
-          if (document.pointerLockElement !== document.body) {
+    // Exit pointer lock on Esc key press
+    document.addEventListener('pointerlockchange', function () {
+        if (document.pointerLockElement !== document.body) {
             document.exitPointerLock();
-          }
-        });
+        }
+    });
 
-        // Handle zoom with mouse wheel (reversed direction)
-        document.addEventListener('wheel', function(event) {
-          var cameraEl = document.getElementById('camera');
-          var camera = cameraEl.getObject3D('camera');
-          camera.fov += event.deltaY * 0.05;  // Reverse zoom direction
-          camera.fov = Math.max(40, Math.min(80, camera.fov)); // Limit the FOV between 10 and 100
-          camera.updateProjectionMatrix();
-        });
+    // Handle zoom with mouse wheel (reversed direction)
+    document.addEventListener('wheel', function (event) {
+        var cameraEl = document.getElementById('camera');
+        var camera = cameraEl.getObject3D('camera');
+        camera.fov += event.deltaY * 0.05;  // Reverse zoom direction
+        camera.fov = Math.max(40, Math.min(80, camera.fov)); // Limit the FOV between 10 and 100
+        camera.updateProjectionMatrix();
+    });
 
-        // Close button functionality
-    $('#closeButton').click(function() {
+    // Close button functionality
+    $('#closeButton').click(function () {
         var aframeContainer = document.getElementById('aframe-container');
         aframeContainer.style.display = 'none';
     });
-      });
+
+    // Handle zoom with touch pinch gestures
+    var initialPinchDistance = null;
+    var initialFov = null;
+
+    $(document).on('touchstart', function (event) {
+        if (event.touches.length === 2) {
+            initialPinchDistance = getPinchDistance(event.touches);
+            var cameraEl = $('#camera')[0];
+            var camera = cameraEl.getObject3D('camera');
+            initialFov = camera.fov;
+        }
+    });
+
+    $(document).on('touchmove', function (event) {
+        if (event.touches.length === 2 && initialPinchDistance !== null) {
+            var newPinchDistance = getPinchDistance(event.touches);
+            var scaleFactor = initialPinchDistance / newPinchDistance;
+            var cameraEl = $('#camera')[0];
+            var camera = cameraEl.getObject3D('camera');
+            camera.fov = initialFov * scaleFactor;
+            camera.fov = Math.max(40, Math.min(80, camera.fov));
+            camera.updateProjectionMatrix();
+        }
+    });
+
+    $(document).on('touchend', function (event) {
+        if (event.touches.length < 2) {
+            initialPinchDistance = null;
+            initialFov = null;
+        }
+    });
+
+    function getPinchDistance(touches) {
+        var dx = touches[0].clientX - touches[1].clientX;
+        var dy = touches[0].clientY - touches[1].clientY;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
+});
