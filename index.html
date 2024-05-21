@@ -34,9 +34,16 @@
     <div id="map"></div>
     <div id="aframe-container">
         <a-scene>
-            <a-sky src="" rotation="0 180 0"></a-sky>
-            <a-entity camera look-controls position="0 1.6 0"></a-entity>
-        </a-scene>
+            <div id="pointerLockInstruction" class="bottom">
+                Hold Ctrl to enable pointer lock
+            </div>
+            <div id="closeButton">x</div>
+            
+            
+            <a-sky src="southhole.jpg"></a-sky>
+            <a-camera id="camera" wasd-controls="enabled: false" look-controls="pointerLockEnabled: true" reverseMouseDrag="false""></a-camera>
+
+          </a-scene>
     </div>
 
 
