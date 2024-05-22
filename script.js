@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#pointerLockInstruction').css('display', 'block');
-    var map = L.map('map').setView([51.06, -4.2], 10.5);
+    var map = L.map('map').setView([51.00, -4.4], 10.5);
 
     L.esri.basemapLayer('Imagery').addTo(map)
 
