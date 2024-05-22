@@ -18,6 +18,7 @@ $(document).ready(function () {
         aframeScene.style.display = 'block';  // Show the A-Frame scene
         console.log("Photo ID:", photoId);
         $('#map').hide();
+        $('#fullscreenButton').show();
     }
 
     // Enable pointer lock on Ctrl/Command key press
@@ -56,6 +57,7 @@ aframeScene.addEventListener('wheel', function (event) {
     var aframeScene = document.querySelector('a-scene');
     aframeScene.style.display = 'none';  // Hide the A-Frame scene
     $('#map').show();  // Show the map
+    $('#fullscreenButton').hide();
 });
 
 //fullscreen button functionality
