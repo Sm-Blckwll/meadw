@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>NT Grasslands</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.OSMGeocoder.js"></script>
+    <script src="https://unpkg.com/esri-leaflet"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="geolet.js"></script>
+
+
+</head>
+
+<body>
+
+    <div class="a-cont">
+        <div class="a">
+            <p>National Trust Grasslands Project</p>
+            <h1>North Devon's Wildflower <br> Savannah</h1>
+        </div>
+    </div>
+    <div class="b-cont">
+        <div class="b">
+            <div class="b-img"><img src="photos/DJI_0475.webp" alt=""></div>
+            <div class="b-text">
+                <h2>Explore the sights from above <b>→</b></h2>
+                <div class="bar"></div>
+                <p>Ninety-seven per cent of species rich grasslands – the equivalent to 4.5 million acres – have been
+                    lost nationally over the last 100 years with only one per cent remaining today.
+
+                    “This has had a devastating impact on our native wildflowers with once common species such as
+                    eyebrights and Cowslips becoming ever rarer, and a disastrous impact on the species that are reliant
+                    on these flower rich habitats such as bumblebees and other pollinators.</p>
+            </div>
+        </div>
+    </div>
+    <div class="insert"></div>
+    <div class="c-cont">
+        
+            <div id="map" class="map"></div>
+        
+        <a-scene embedded>
+            <a-assets>
+                <img id="skyTexture" src="southhole.jpg">
+            </a-assets>
+            <button id="closeButton" class="close-icon"><i class="fas fa-times"></i></button>
+            <button id="fullscreenButton" class="fullscreen-icon"><i class="fas fa-expand"></i></button>
+            <a-sky src=""></a-sky>
+            <a-camera id="camera" wasd-controls="enabled: false" look-controls="pointerLockEnabled: true"
+                reverseMouseDrag="false"></a-camera>
+        </a-scene>
+    </div>
+
+
+
+
+
+
+    <footer>
+
+    </footer>
+</body>
+
+<script src=" script.js"></script>
+
+
+</html>
