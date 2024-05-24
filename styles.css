@@ -334,3 +334,31 @@ a-scene.full-window {
 #fullscreenButton:hover {
   color: #ddd;
 }
+
+.leaflet-popup-content-wrapper {
+  width: auto;
+  background: rgba(0, 0, 0, 0)!important;
+  border-radius: .5rem;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0)!important;
+}
+
+.leaflet-popup-content {
+  margin: 8px!important;
+}
+
+.custom-popup h2 {
+  margin: 0;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.custom-popup img {
+  width: 200px;
+  aspect-ratio: 16/9;
+  border-radius: .4rem;
+}
+
+.custom-popup p {
+  font-size: .8rem;
+  line-height: .6rem;
+}
